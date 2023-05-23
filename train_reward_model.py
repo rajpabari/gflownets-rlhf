@@ -221,7 +221,8 @@ import gc
 gc.collect()
 print("Beginning training")
 for epoch in range(EPOCHS):
+    torch.save(model.state_dict(), "./saved-models/reward_model_" + str(epoch) + ".pt")
     print("Epoch", epoch)
     train(epoch)
 
-torch.save(model.state_dict(), "reward_model.pt")
+torch.save(model.state_dict(), "./saved-models/reward_model_final.pt")
