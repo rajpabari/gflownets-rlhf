@@ -223,3 +223,5 @@ print("Beginning training")
 for epoch in range(EPOCHS):
     print("Epoch", epoch)
     train(epoch)
+
+torch.save(model.state_dict(), "reward_model.pt")
