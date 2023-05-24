@@ -65,7 +65,7 @@ warnings.filterwarnings("ignore")
 # %%
 import zipfile
 
-with zipfile.ZipFile("gflownets-rlhf/data/train_reward.csv.zip", "r") as zip_ref:
+with zipfile.ZipFile("data/train_reward.csv.zip", "r") as zip_ref:
     zip_ref.extractall("./")
 
 
@@ -177,7 +177,7 @@ class DistilBERTClass(torch.nn.Module):
         pooler = torch.nn.Tanh()(pooler)
         pooler = self.dropout(pooler)
         linear = self.classifier(pooler)
-        output = F.softmax(linear, dim=1)
+        output = torch.sigmoid(linear)
         return output
 
 
@@ -188,7 +188,7 @@ model.to(device)
 
 # %%
 def loss_fn(outputs, targets):
-    return torch.nn.BCELoss()(outputs, targets)
+    return torch.nn.BCEWithLogitsLoss()(outputs, targets)
 
 
 # %%
