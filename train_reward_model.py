@@ -183,6 +183,8 @@ class DistilBERTClass(torch.nn.Module):
 
 # %%
 model = DistilBERTClass()
+#parallelize the model over multiple gpus
+model = torch.nn.DataParallel(model)
 model.to(device)
 
 
